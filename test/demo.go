@@ -49,5 +49,6 @@ func main() {
 	var sss string = "haohaohao"
 	var rrr []rune = []rune(sss)
 	fmt.Println(rrr)
+	//环境测试
 
 }
