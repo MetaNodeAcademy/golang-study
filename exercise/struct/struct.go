@@ -14,7 +14,7 @@ type Person struct {
 
 type Result struct {
 	Code    int         `json:"code"`
-	Message string      `json:"msg“`
+	Message string      `json:"msg"`
 	Data    interface{} `json:"data"`
 }
 

@@ -96,4 +96,12 @@ myLogic:
 		fmt.Println("当前m为6")
 	}
 
+	f := 3
+Here:
+	fmt.Printf("当前f为:%v\n", f)
+	f++
+	if f < 6 {
+		goto Here
+	}
+	fmt.Println("结束")
 }
