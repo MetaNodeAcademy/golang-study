@@ -44,7 +44,7 @@ func main() {
 		return func(i int, s string) (int, string) {
 			return i, s
 		}
-	}()
+	}() //这里的() 表示立即执行外层的匿名函数
 
 	// 执行returnFunc闭包并传递参数
 	ret1, ret2 := returnFunc(1, "test")
