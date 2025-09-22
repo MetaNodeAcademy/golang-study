@@ -98,4 +98,10 @@ func main() {
 
 	fmt.Println("基本操作执行完成...")
 
+	//update products set tag_no="923" where id= "product3的id"
+	db.Debug().Model(&product3).Select("tag_no").Updates(map[string]interface{}{"code": "P01", "price": 333, "tag_no": "923"}) //.Debug()会打印真实sql
+
+	//.Omit() 忽略更新某个/些字段
+	db.Model(&product3).Omit("code", "price").Updates(map[string]interface{}{"code": "P0555", "price": 456, "tag_no": "9876"})
+
 }
