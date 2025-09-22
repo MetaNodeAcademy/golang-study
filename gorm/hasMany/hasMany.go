@@ -55,7 +55,7 @@ func main() {
 		},
 	})
 
-	users, _ := GetAll(db)
+	users, err := GetAll(db)
 	if err != nil {
 		panic(err)
 	}
