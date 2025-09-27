@@ -58,6 +58,59 @@ func main() {
 	digits := []int{1, 7, 3}
 	fmt.Println(plusOneArray(digits))
 
+	/*
+		6.删除有序数组中的重复项
+		给你一个有序数组 nums ，请你原地删除重复出现的元素，使每个元素只出现一次，
+		返回删除后数组的新长度。不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+		可以使用双指针法，一个慢指针 i 用于记录不重复元素的位置，一个快指针 j 用于遍历数组，当 nums[i]
+		与 nums[j] 不相等时，将 nums[j] 赋值给 nums[i + 1]，并将 i 后移一位。
+	*/
+
+	var originArray []int = []int{1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9}
+	finalArray := getFinalArray(originArray)
+	fmt.Printf("经过去重后的finalArray = %v\n", finalArray)
+
+	/*
+			7.两数之和
+			给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出
+			和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+		    你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。
+	*/
+
+	target := 9
+	var originArray2 []int = []int{1, 2, 6, 5, 7, 9}
+	finalIndexArray := towSum(originArray2, target)
+	if len(finalIndexArray) == 0 {
+		fmt.Println("没有满足条件的索引")
+	} else {
+		fmt.Printf("最终满足条件的索引数组为：%v", finalIndexArray)
+	}
+
+}
+
+func towSum(originArray []int, target int) []int {
+	for i := 0; i < len(originArray); i++ {
+		for j := i + 1; j < len(originArray); j++ {
+			if originArray[i]+originArray[j] == target {
+				return []int{i, j}
+			}
+		}
+	}
+	return []int{}
+}
+
+func getFinalArray(originArray []int) []int {
+	if len(originArray) == 0 {
+		return []int{}
+	}
+	var finalArray []int
+	finalArray = append(finalArray, originArray[0]) // 先添加第一个元素
+	for i := 1; i < len(originArray); i++ {         // 从第二个元素开始遍历
+		if originArray[i] != originArray[i-1] {
+			finalArray = append(finalArray, originArray[i])
+		}
+	}
+	return finalArray
 }
 
 func plusOneArray(digits []int) []int {
