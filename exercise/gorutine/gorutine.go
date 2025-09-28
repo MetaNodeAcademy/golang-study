@@ -49,7 +49,18 @@ func main() {
 		}()
 	}
 	time.Sleep(1 * time.Second)
-	fmt.Printf("counter获取到的结果为：%d\n", counter.count)
+	fmt.Printf("SafeConter获取到的结果为：%d\n", counter.count)
+
+	counter1 := UnSafeConter{}
+	for i := 0; i < 1000; i++ {
+		go func() {
+			for j := 0; j < 100; j++ {
+				counter1.increment()
+			}
+		}()
+	}
+	time.Sleep(1 * time.Second)
+	fmt.Printf("SafeConter获取到的结果为：%d\n", counter1.count)
 
 }
 
