@@ -88,6 +88,39 @@ func main() {
 	//主线程睡眠一下等待协程执行
 	time.Sleep(2 * time.Second)
 
+	//创建无缓冲通道
+	chan11 := make(chan string)
+	//启动发送数据的协程
+	go sendData(chan11)
+	var data = <-chan11
+	fmt.Println("读取数据成功:", data)
+
+	chan33 := make(chan int)
+
+	go func() {
+		defer close(chan33)
+		time.Sleep(4 * time.Second)
+		chan33 <- 66666
+		chan33 <- 55555
+		chan33 <- 22222
+	}()
+
+	/*
+	  select:
+	  类似java中的switch,只不过它专门用于通道通信(channel)
+	  随机选择一个可执行的case执行，当无可执行的case时，
+	  会立即执行default分支，当无default分支时，会阻塞，直到有可执行的case执行
+	*/
+
+	select {
+	case v := <-chan33:
+		fmt.Println("接收到数据：", v)
+	case t := <-time.After(2 * time.Second):
+		fmt.Println("超时了,超时时间为:", t)
+		// default:
+		// 	fmt.Println("没有数据")
+	}
+
 }
 
 // 数据生产者
@@ -123,4 +156,8 @@ func consumer1(ch chan string) {
 		data := <-ch
 		fmt.Println("消费者消费了数据:", data)
 	}
+}
+
+func sendData(ch chan<- string) {
+	ch <- "测试chnnel写入数据"
 }
