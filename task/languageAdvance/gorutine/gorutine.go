@@ -6,24 +6,6 @@ import (
 	"time"
 )
 
-// 指针
-/*
-编写一个Go程序，定义一个函数，该函数接收一个整数指针作为参数，在函数内部将该指针指向的值增加10，然后在主函数中调用该函数并输出修改后的值
-*/
-func modifyValueByPointer(a *int) int {
-	return *a + 10
-}
-
-/*
-实现一个函数，接收一个整数切片的指针，将切片中的每个元素乘以2
-*/
-func modifySlice(slicePointer *[]int) {
-	for i := 0; i < len(*slicePointer); i++ {
-		(*slicePointer)[i] *= 2
-		fmt.Printf("切片元素修改后的值为：%d\n", (*slicePointer)[i])
-	}
-}
-
 //gorutine
 /*
 编写一个程序，使用 go 关键字启动两个协程，一个协程打印从1到10的奇数，另一个协程打印从2到10的偶数
@@ -105,17 +87,7 @@ func (s *Scheduler) wait() {
 	close(s.tasksQueue)
 	s.wg.Wait()
 }
-
 func main() {
-	num := 2
-	modifyNum := modifyValueByPointer(&num)
-	fmt.Printf("修改后的值为：%d", modifyNum)
-	////////////////////////////////////////
-	slice := []int{1, 2, 3, 4, 5}
-	modifySlice(&slice)
-	/////////////////////////////////////////
-	printJS()
-	/////////////////////////////////////////
 	scheduler := newScheduler(3, 10)
 	scheduler.start()
 	//添加测试任务
